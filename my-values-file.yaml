@@ -12,6 +12,7 @@ opentelemetry-collector:
         traces:
           exporters:
             - googlecloud
+            - spanmetrics
           processors:
             - memory_limiter
             - batch
