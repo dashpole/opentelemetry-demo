@@ -1,0 +1,18 @@
+# This resource registers kubernetes services with the GCP service directory so
+# they can be used for uptime checks. See
+# https://cloud.google.com/service-directory/docs/sd-gke-overview.
+apiVersion: networking.gke.io/v1alpha1
+kind: ServiceDirectoryRegistrationPolicy
+metadata:
+    # Only the name "default" is allowed.
+    name: default
+    namespace: otel-demo
+spec:
+  resources:
+    - kind: Service
+      # match the frontendproxy service
+      selector:
+        matchLabels:
+          app.kubernetes.io/part-of: "opentelemetry-demo"
+          app.kubernetes.io/component: frontendproxy
+      
